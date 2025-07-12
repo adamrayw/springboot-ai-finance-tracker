@@ -3,6 +3,9 @@ package com.adam.aifinance.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.adam.aifinance.model.Transaction;
@@ -17,6 +20,11 @@ public class TransactionService {
 
     public List<Transaction> getAll() {
         return repository.findAll();
+    }
+
+    public List<Transaction> getRecentTransactions() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("date").descending());
+        return repository.findAll(pageable).getContent();
     }
 
     public Transaction save(Transaction tx) {

@@ -35,6 +35,11 @@ public class TransactionController {
         return service.getAll();
     }
 
+    @GetMapping("/recent")
+    public List<Transaction> getRecentTransactions() {
+        return service.getRecentTransactions();
+    }
+
     @PostMapping
     public Transaction create(@RequestBody Transaction tx) {
         return service.save(tx);
